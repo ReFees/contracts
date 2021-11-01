@@ -1,0 +1,38 @@
+The term Layer 2 refers to a series of blockchain solutions built on a different network running on top of layer 1, the main Ethereum network, through smart contracts. They are designed to increase the scalability of layer 1 while still being able to benefit from the security and the existing architecture of the Mainnet. The main idea for these protocols is to perform transactions off-chain to achieve a faster confirmation time, lower fees and traffic reduction on the Mainnet. \cite{gudgeon_sok_2020, noauthor_layer_nodate}.
+
+The aim of this section is to systematise the panel of layer 2 protocols that emerged in the past decade. To this end, we provide a comparison of the main solutions in terms of structure, synchronisation with layer 1, scalability power and security. Unsolved challenges and expected future adoption of these protocols are also addressed.  
+
+% Motivation
+% Description
+% Points for faibles
+% Adoption marché (utilisation)
+% Future 
+
+\subsubsection{Side chains}
+* EVM compatible and can thus scale general purpose applications
+* Main drawback : less secure than layer two solutions by not relying on the security of etherium, and instead having their own consensus models. 
+https://link.springer.com/content/pdf/10.1007%2F978-3-030-51280-4.pdf
+\subsubsection{State channels}
+\subsubsection{Rollups}
+
+Rollups are yet another type of scaling solution. The core idea is to execute transactions outside layer 1 and store the resulting transaction data as proof back on layer 1. Correct execution on layer 2 is ensured by a smart contract in layer 1 using the transaction data. 
+
+Since computations are moved off-chain, e.g. on layer 2, transactions can be processed at much higher rate. On layer 1, they are committed in batches using data compression mechanisms to reduce both cost and network effects on Ethereum. 
+
+Hence, Rollups can be viewed as a combination between state channels and side chains since they can create general purpose applications through the EVM compatibility while still fully making use of the security mechanisms deployed on Ethereum.
+
+To incentivise users to execute and verify transactions correctly, Rollup protocols require staking a bond as collateral. If a fraudulent action is detected, the system slashes the bonds of the users involved. 
+
+We can further distinguish between different types of Rollups when it comes to proofs and security model. 
+\begin{itemize}
+    \item On one hand, \textit{Optimistic Rollups}, optimistically assume that transactions are valid by default.  Fraud proofs are used : if a user spots an invalid transaction, 
+    
+    When a fraud proof is submitted, 
+    
+    Dispute  resolution mode is an exceptional state. 
+    \item On the other and, \textit{Zero-Knowleadge (ZK) Rollups}
+\end{itemize}
+
+
+
+
