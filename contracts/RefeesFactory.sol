@@ -16,7 +16,8 @@ contract RefeesFactory is RefeesEvents {
     RefeesSubscription[] public subscriptions;
 
     constructor() {
-        // mint provider and client NFTs
+        // system tokens
+        refT = new RefeesToken();
         refC = new RefeesClient();
         refP = new RefeesProvider();
     }
