@@ -46,6 +46,7 @@ contract RefeesSubscription {
 
 
     function startSubscription() public returns (bool) {
+        require(!started);
         require(refC.ownerOf(clientId) != refP.ownerOf(providerId));
         require(refT.allowance(refC.ownerOf(clientId), address(this)) >= totalExpectedPaymentAmount);
         started = true;
@@ -53,6 +54,7 @@ contract RefeesSubscription {
     }
 
     function refund(uint256 gasAmount) public returns (bool) {
+        require(started);
         // get client address
         address addrClient = refC.ownerOf(clientId);
         pool.withdraw(gasAmount);
