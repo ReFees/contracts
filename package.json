@@ -2,11 +2,12 @@
   "dependencies": {
     "@chainlink/contracts": "^0.2.2",
     "@openzeppelin/contracts": "^4.3.3",
+    "@openzeppelin/contracts-upgradeable": "^4.3.3",
     "install": "^0.13.0",
     "npm": "^8.1.4",
-    "solc": "^0.8.10"
+    "solc": "^0.8.2"
   },
   "devDependencies": {
-    "truffle": "^5.4.21"
+    "truffle": "^5.1.65"
   }
 }
