@@ -3,17 +3,23 @@ pragma solidity ^0.8.2;
 
 import './RefeesClient.sol';
 import './RefeesProvider.sol';
+import './RefeesPool.sol';
 
-contract Refees {
-    uint256 immutable maturity;
-    uint256 immutable frequency;
-    uint256 immutable paymentAmount;
-    uint256 immutable initialReserve;
+contract RefeesSubscription {
+    // contract variables
+    uint256 immutable public maturity;
+    uint256 immutable public frequency;
+    uint256 immutable public paymentAmount;
+    uint256 immutable public initialReserve;
+    // NFT Tokens
     RefeesClient immutable refC;
     RefeesProvider immutable refP;
+    // tokenId associated the the NFT
     uint256 public immutable clientId;
     uint256 public immutable providerId;
+    // mutable variables (state of contract)
     bool private started;
+    RefeesPool pool;
 
     constructor(uint256 _maturity, uint256 _frequency, uint256 _paymentAmount,uint256 _initialReserve, RefeesClient _refC, RefeesProvider _refP) {
         // contract variables
@@ -26,8 +32,9 @@ contract Refees {
         refP = _refP;
         clientId   = refC.safeMint(msg.sender);
         providerId = refP.safeMint(msg.sender);
-        // dynamic variables
+        // state variables
         started = false;
+        pool    = new RefeesPool(_initialReserve);
     }
 
     function subscribe() public returns (bool) {
@@ -43,7 +50,7 @@ contract Refees {
         // get client address
         address addrClient = refC.ownerOf(clientId);
 
-        
+
     }
 
 
