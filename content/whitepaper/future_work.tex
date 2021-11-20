@@ -1,0 +1,111 @@
+In this section, we address some of the challenges and future work for the system. XXXXXXXXXX
+XXXXXXXXXXXXXXXXXXXXX
+
+
+ \subsection{Generalisation through any subscription model}
+    
+    The main concern that is addressed with such smart contract is to offer a shared platform to allow any user to hedge their risk to gas volatility. This instantaneous access of liquidity to pay for gas fees, grant the possibility of protecting oneself against financial loss or diminished computing power on the Mainnet. With its price valuation depending on complex relationship between underlying fees, market volatility of \textit{{\projectName}} contracts and recurrent payment options, it can be roughly assimilated to an traditional option.
+    
+    The platform give users high flexibility, the upper limit of contract prospecting is undefined. Transaction fee covered, time limit, recurrent payment and the others parameters are to be totally chosen by both parties, allowing for a tailor-maid gas hedging solution. There is still natural exceptions to this versatility, no negative fee or time limit would be allowed for example. The authors intend no implication the the free market but dawn on potential bid-ask gap and fancy parameters settings. From the game theory, such margin behaviour are said to be existing but naturally evicted from the market. The irrelevancy and scarcity of such actor would be monitored but said to be negligible enough as a first approximation.\cite{XXX}
+    
+    A dynamic transaction fee plasticity would also be possible. As a matter of fact, one sees the volatility evolving during the day with minimum and maximum throughout the day. A gross conjecture stating on a daily partner of gas volatility based on empirical observations leads to assert highest volatility between XXX-XXX and lowest between XXX-XXX. Knowing more in details this particular seasonal time series model, a smart contract allowing for its gas fee coverage to spread over its lifetime would avoid minute scale contract existence.
+     
+ \subsection{Internal gas fee usage}
+    
+    As seen in Fig. 4\ref{XXX} at total of XXX transactions occur for the creation of the smart contract and XXX transactions are to be published on the Mainnet within one iteration. It said that every iterations would have similar amount of transactions. From the Ethereum gas operation table from Annex XXX \ref{XXX}, there is a total of XXX gas fee for contract creation and XXX for one iteration of the refunding. Note that this is considering a fully Ethereum based smart contract.
+    
+    % Mettre un algorithm Table
+    
+    There is a clear goal from the authors to lower down a maximum the gas consumption needed for a pair of contract user and owner. Beside the pure code optimisation, the smart contract will be hosted on various layer 2 solution platforms (Optimism, Arbitrum, Polygon, etc.). This previous regard will permits to most of the transaction to be settle down off chain. When one keeps in mind that the most important steps are to check wherever users can create a sufficient pool at the opening and register their new balances when the contract is resolved. In addition to this, it opens up the project to a maximum of potential users that are disseminated already along those platforms.
+    
+    To elaborate more in details of such platform utilisation, one can imagine hosting the recurrent payment made during the contract lifetime on a payment channel. This kind of state channel would be a fit for this utilisation as it only requires one parameter to modify the state of the channel.
+    In the meantime, to ensure the overall security the data associated to the current balance of each pool would be preserved on a side-chain with a periodic synchronisation on the Mainnet.
+    
+    
+    1) Query latest block
+    2) Look up the consumption of contract user
+    3) Initiate reimbursement procedure
+    4) Withdraw money from contract owner pool
+    5) Top up balance of contract user
+     
+  \subsection{ External gas fee volatility induced}
+    
+    It has to be highlighted that the previous described smart contract is not and shall not be considered as a Layer 2 solution. As explained earlier such consideration would mean for the project to be a viable layer 1 scalability increase actor \ref{sok/XXX}. Nevertheless as seen in \ref{XXX}, the utilisation of the smart contract would engage the user in the consumption of gas. This utilisation will further induce the actual gas valuation market and potentially increase its volatility, even if the smart contract is optimised to use low gas. In reality, the project is not meant to reduce gas consumption but to simply offer either a speculation tool to the contract owner or a hedging tool to the contract holder. Because one intraday cryptos trader would like to avoid its activity depending on gas market.
+    
+    As mentioned in the following section, it is not a unilateral advantages relationship between the contract holder and owner, as it may greatly induce layer 2 operation arbitrage. One could use a mixture of solutions to optimise gas consumption of its underlying asset. Authors are currently working on a generative tool to allow the contract owner to undergo this optimisation process. This particular point stands as a future service allowed through the platform. 
+     
+  \subsection{Resources consumption paradox}
+
+    This project would also lead to an implicit usage reduction and increase of resources. Indeed, one of the forecast practice attributed to contract owners, is their retention or greediness on executing gas costing transactions depending on their profit and loss state at time of usage. This can be summed in two particular situation.
+    
+    The first one being the increase of user gas consumption even at high volatility peak. In fact, having your gas fee hedged during valuation peak will allow you to undergo any usual process unaffected by the current gas price, as there is no need on protecting your capital.
+    
+    In contrast, in time of low gas price, user may found to be the "loser of the game" and will retain their operations until positive return on their hedging is foreseen. This second scenario is less prone to be a probable behaviour from users, as their need to ensure their transactions may be more important.
+    
+    From such scheme speculations, the external gas fee induction would be then strengthen by gas hedged user.
+     
+ \subsection{Combination of {\projectName} with \$GAS Token} \label{section:future:gas-token}
+
+    In the future, {\projectName} could be combined with \$GAS tokens. As shown in the example of section \ref{section:Applications}, the system benefits only for one of the users (either the client or the provider) but never for both of them.  Moreover, the yield of the provider directly depends on the presence of outliers (spikes) in the gas price. Here is where \$GAS tokens intervene.
+
+    Gas tokens would be a way for the provider to edge the risk induced by gas volatility cleverly.  An additional feature to our system would allow the contract to store (mint tokens) gas when its price is low and release (burn tokens) it when the gas price is high to obtain a rebate on the client's gas fees. These operations (storing and releasing) would be triggered by the provider. This way, if the provider has some knowledge about how gas price behaves he could increase his profit. On the other side, no action is required to be performed by the client. The provider hedge the risk for the client. 
+    
+    In practice, one can use the functionalities proposed by the GST2 contract (cf. \href{https://github.com/projectchicago/gastoken/blob/da37d16390f3b91ebbb7d8e7744f4bdd16b3d16a/contract/GST2_ETH.sol#L158}{source code}) which contains minting and burning methods. We draw the reader's attention to the fact that the implementation feasibility of the combination of both systems ({\projectName}+Gas tokens) has not been fully investigated yet. However, as of today, we remain confident that this is possible. 
+    
+    Using the same contract as in section \ref{section:Applications}, it is possible to simulate the yields produced by the combination of the system with \$GAS tokens. The rebate obtained by using \$GAS tokens is considered as another source of yield. More precisely, it amounts to $yield=-20000\cdot gas_{low}+(15000-5000)\cdot gas_{high}$ as shown in section \ref{section:Existing_solutions}. Since the process can be repeated multiple times by the provider, this yield is multiplied by the new variable $n_{hedgingComponents}$ set to 10 for this example. Again, the first simulation runs on the data without spikes (\ref{fig:gas-price-with-outlier}). Figure \ref{tab:variables:application-4} contains the result of the experimentation.
+    
+    \begin{table}[htbp]
+    \caption{[{\projectName} - \$GAS token] returns (without outlier) }
+    \begin{center}
+    \begin{tabular}{|l|c|}
+    \hline
+    Gas used by the client & 0.02509 ETH \\
+    \hline
+    Total payments of the client & 0.0252 ETH \\
+    \hline
+    Client return &  0.02509-0.0252 = -0.00011 ETH \\
+    \hline
+    Provider return & -0.00117 ETH \\
+    \hline
+    \end{tabular}
+    \label{tab:variables:application-4}
+    \end{center}
+    \end{table}
+    
+    This experiment is then repeated on the data including the outlier (\ref{fig:gas-price-with-outlier}). The returns obtained can  be found in \ref{tab:variables:application-5}.
+    
+    \begin{table}[htbp]
+    \caption{[{\projectName} - \$GAS token] returns  (with an outlier) }
+    \begin{center}
+    \begin{tabular}{|l|c|}
+    \hline
+    Gas used by the client & 0.02797 ETH \\
+    \hline
+    Total payments of the client & 0.0252 ETH \\
+    \hline
+    Client return &  0.02797-0.0252 = 0.00277 ETH \\
+    \hline
+    Provider return &  0.01074 \\
+    \hline
+    \end{tabular}
+    \label{tab:variables:application-5}
+    \end{center}
+    \end{table}
+    
+    The major difference with section \ref{section:Applications} is that the second simulation ends up in a win-win state where both of the users benefit from the presence of the outlier. The first simulation benefits none of the users. However, one should keep in mind that the loss faced by the provider is now due to the non-used \$GAS tokens. Therefore, if the provider has some knowledge on how to properly use \$GAS tokens (maybe $n_{hedging-components}=10$ is not optimal), he could also generate a profit in the first situation. Moreover, in this example, it is assumed that the non-used \$GAS tokens are lost. But one can imagine that the provider keeps them for future contracts, which could result in a positive yield as well.
+
+
+ \subsection{Ethereum 2.0}
+    
+    As previously stated, the Mainnet congestion decrease is the priority motivation in lowering gas fees of Ethereum. The Serenity (Ethereum 2.0) upgrade would allow an increase in amount of transaction in one second and be a start in the resolution of congestion stymie. Undeniably, the proof of stake model used in Serenity reduces greatly the energy/power-intensive problem of the proof of work used in the current consensus mechanism. While Sharding increase the total number of transactions on the network as different validators are designated with a unique validation on disparate shards.
+    
+    The high adaptability of {\projectName} parameters settings would allow to hedge gas consumption even if the gas valuation gets a deep down correction of its quotation. Obviously its utilisation is to be considered higher before the final Serenity upgrade with a decreasing number of casual users throughout the stabilisation and lowering of gas cost of Ethereum network. Nevertheless, the authors are confident in such contract potential after the upgrade, but the user profile would maybe switch from casual hedger to structure or institutional actors that has a need in ensuring their recurring use of the Mainnet. Such example would be a country legislative adopting an e-voting system based on Ethereum network, while taking in charge the gas cost associated to every participants. The institution would surely reduce their gas cost by using voting channel, a state channel dedicated to voting application, together with an optimisation of transaction execution depending on gas volatility. Beside this they would probably adopt a long-term hedging strategy to ensure the voting system stability over a period. Conversely, it would allow enough time for the institution to transfer their voting system to a new technology, if this latter is not reliable enough or a new comer has greater potential.
+     
+ \subsection{Towards complete decentralisation}
+    
+    Similar to state channels solution the identity of the contract holder and owner would have to be known throughout the whole contract period. This to allow for the external oracle to fetch the correct gas consumption balance on the Mainnet and to withdraw from the right pool the sufficient amount of liquidity. This flaw in privacy and decentralisation are the main area concern undergoing research from the authors. Despite the fact that the smart contracts pools available to the user would be auto-regulated with no exterior decision made by a central, authoritative group.
+    
+    The oracle from which the smart contract state would depend are to be directly connected the Ethereum Blockchain data querying solution such as Etherscan. Investigation on the previously proposed solution shows that it is decentralised and do not any external action except questioning the latest block on its transactions \cite{XXX} This signify that from this particular aspect a decentralisation of {\projectName} is ensured.
+    
+    
+    % Part 2 of Data oracle : menthion Graph

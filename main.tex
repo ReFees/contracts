@@ -1,24 +1,48 @@
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 \usepackage{import}
+\newcommand{\projectName}{\textit{ReFees}}
+\def\thesubsubsectiondis{\thesubsectiondis\arabic{subsubsection}}
+
+\makeatletter
+\def\subsubsection{%
+  \@startsection
+    {subsubsection}                 % type
+    {3}                             % level
+    {\parindent}                    % indent
+    {3.5ex plus 1.5ex minus 1.5ex}  % beforeskip {0ex plus 0.1ex minus 0.1ex}
+    {0.7ex plus .5ex minus 0ex}     % afterskip {0ex}
+    {\normalfont\normalsize\itshape}% style
+}
+\makeatother
 
 \import{content/header}{imports}
 \begin{document}
 \import{content/header}{header}
 
-\section{Introduction}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits. 
-
-
+\section{Identified problem}
+\import{content/sok/}{problem}
 \section{Existing solutions}
-\subsection{GAS Token}
+\label{section:Existing_solutions}
+\subsection{\$GAS Token}
 \import{content/sok/existing_solutions}{gasToken}
 \subsection{Layer 2}
 \import{content/sok/existing_solutions}{layer2}
 
+\section{Future solutions}
+\import{content/sok/future_solutions}{future_solutions}
+\section{\projectName}
+\import{content/whitepaper}{refees}
+\section{Applications}
+\label{section:Applications}
+\import{content/whitepaper}{applications}
 
+\section{Miscellanea And Concerns}
+\import{content/whitepaper}{future_work}
+\section{Conclusion}
+\import{content/whitepaper}{conclusion}
 \bibliographystyle{IEEEtran}
 \bibliography{references}
+
 
 \end{document}
