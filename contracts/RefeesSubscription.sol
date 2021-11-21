@@ -5,8 +5,11 @@ import './tokens/RefeesToken.sol';
 import './tokens/RefeesClient.sol';
 import './tokens/RefeesProvider.sol';
 import './helpers/RefeesPool.sol';
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract RefeesSubscription {
+    using Counters for Counters.Counter;
+
     // contract variables
     uint256 immutable public maturity;
     uint256 immutable public frequency;
@@ -22,10 +25,17 @@ contract RefeesSubscription {
     uint256 public immutable clientId;
     uint256 public immutable providerId;
     // mutable variables (state of contract)
+    bool private wasStarted;
     bool private started;
-    RefeesPool pool;
+    Counters.Counter private paymentCounter;
+    RefeesPool private pool;
+    // scheduler 
+    address scheduler;
+    // oracle
+    address oracle;
 
     constructor(uint256 _maturity, uint256 _frequency, uint256 _paymentAmount,uint256 _initialReserve, RefeesToken _refT, RefeesClient _refC, RefeesProvider _refP) {
+        require(_maturity % _frequency == 0);
         // contract variables
         maturity  = _maturity;
         frequency = _frequency;
@@ -40,17 +50,53 @@ contract RefeesSubscription {
         clientId   = refC.safeMint(msg.sender);
         providerId = refP.safeMint(msg.sender);
         // state variables
+        wasStarted = false;
         started = false;
         pool    = new RefeesPool(_initialReserve);
+        // initial deposit
+        pool.deposit(initialReserve);
     }
 
+    function trigger() external {
+        require(msg.sender == scheduler); // only scheduler is allowed to trigger
+        if (paymentCounter.current() == 0) {
+            startSubscription();
+        }
+        else {
+        if (paymentCounter.current() < maturity / frequency) {
+            clientPayment();
+            paymentCounter.increment();
+        }
+        else {
+            stopSubscription();
+        }
+        uint256 gasFees = oracle.get(refC.ownerOf(clientId));
+        refund(gasFees);
+        }
+            
+    }
 
-    function startSubscription() public returns (bool) {
-        require(!started);
+    function startSubscription() private returns (bool) {
+        require(!started && !wasStarted);
         require(refC.ownerOf(clientId) != refP.ownerOf(providerId));
         require(refT.allowance(refC.ownerOf(clientId), address(this)) >= totalExpectedPaymentAmount);
         started = true;
+        wasStarted = true;
         return true;
+    }
+
+    function stopSubscription() private returns (bool) {
+        require(started && wasStarted);
+        started = false;
+        address addrProvider   = refP.ownerOf(providerId);
+        uint256 residualAmount = pool.empty();
+        return refT.transfer(addrProvider, residualAmount);
+    }
+
+    function clientPayment() private returns (bool) {
+        address addrClient = refC.ownerOf(clientId);
+        pool.deposit(paymentAmount);
+        return refT.transfer(addrClient, paymentAmount);
     }
 
     function refund(uint256 gasAmount) public returns (bool) {

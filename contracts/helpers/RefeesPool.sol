@@ -28,20 +28,20 @@ contract RefeesPool is RefeesEvents {
         return false;
     }
 
-    function withdraw(uint256 amount) public returns (bool) {
+    function withdraw(uint256 amount) public returns (uint256) {
         require(accessible);
 
         if (value < amount) {
             emit InsufficientPool(value, amount);
-            return false;
+            return 0;
         } else {
         value -= amount;
         emit WithdrawalPool(amount);
-        return true;
+        return amount;
         }
     }
 
-    function empty() public returns (bool) {
+    function empty() public returns (uint256) {
         return withdraw(value);
     }
 
