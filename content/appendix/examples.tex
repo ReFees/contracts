@@ -1,0 +1,54 @@
+\begin{table*}[htbp]
+\caption{Comparison of Layer 2 Protocols}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c}
+\hline
+%\textbf{}&\multicolumn{2}{|c|}{\textbf{Rollup Type}} \\
+\cline{2-3} 
+  \textbf{Protocol} 
+& \textbf{\textit{Layer 2 Type}}
+& \textbf{\textit{Notable partner projects}}
+& \textbf{\textit{Smart contract support}} 
+& \textbf{\textit{EVM Compatible}} \\
+\hline
+Optimism & Optimistic rollups  & Synthetics, Uniswap                 &X & X\\
+Arbitrum & Optimistic rollups  & uniswap sushi, Bangor Auger, Reddit &X & X\\
+ZkSync   & ZK-Rollups          & Aave, Curve & X & X\\
+Aztec    & ZK-Rollups          &  & X & X\\
+Polygon    & Sidechain       & Curve, Aave & X & X\\
+StarkEx    & Validium       & Sorare, dYdX & X &  \\
+\hline
+\end{tabular}
+\label{tab:comparison:layer2}
+\end{center}
+\end{table*}
+
+
+
+\subsection{Optimism and Arbitrum}
+
+In terms of Optimistic Rollups, \textit{Optimism} \cite{OptimismEthereumLower} and \textit{Arbitrum} \cite{noauthor_arbitrum_nodate} are considered to be the most popular options which already started their deployment on the Mainnet. If they share most of their functionalities, several differences are worth mentioning :
+\begin{itemize}
+    \item To tackle the long withdrawal problem, Optimism decided to partner up with MakerDao. Several tokens such as DAI can benefit from the collaboration. 
+    \item Arbitrum developed a algorithm to narrow down the scope of disputes so that only a few transactions need to be reevaluated on layer 1 when a fraud is reported.
+    \item Transaction ordering is handled differently in both systems. Arbirtrum uses a centralised sequencer while Optimism uses third parties for a given amount of time via an auction mechanism.
+\end{itemize}
+
+\subsection{ZkSync and Aztec}
+
+ZkSync \cite{httpsmatter-labsio_zksync_nodate} and Aztec (\cite{noauthor_aztec_nodate}) are two Layer 2 networks that provide Ethereum scaling solutions and are already active on the Ethereum mainnet. To guarantee both privacy and scalability, they both use the Zero-Knowledge Rollup described in previous sections. Furthermore, while ZkSync seeks to be a generic protocol that could increase Ethereum's transaction throughput, Aztec prioritises privacy while retaining some scalability\cite{noauthor_aztec_nodate}. The Rollup, according to the researchers, can handle 300 transactions per second while also allowing protected ERC-20 token transactions and private interactions with decentralised finance protocols. As part of a pooling contract, users would be able to trade on Uniswap and other exchanges.
+
+\subsection{Polygon - Matic}
+Polygon (with the ticker MATIC)  \cite{noauthor_polygon_nodate} is a multi-chained system, a framework and a protocol all in one. It connects Ethereum-compatible blockchain networks, and as with other protocols we've talked about, it was created to address the present Ethereum network's scalability difficulties\cite{noauthor_polygon_2021}. Polygon uses side chains added to the primary platform cost-effectively and efficiently. Polygon's multi-chain network enables blockchain networks to communicate with one another outside of Ethereum's core chain while maintaining Ethereum's liquidity, security, and interoperability.
+
+The Polygon ecosystem's core resource is MATIC, Polygon's token. In addition to being an asset, it is primarily utilised for staking tokens (proof-of-stake algorithm) to protect the Polygon network. The MATIC token has a maximum supply of 10 billion units, of which over 67\% are now in use. With a price of \$1.4 per token and a market capitalization of more than \$9 billion, it is currently among the top 25 cryptocurrencies in the world.
+
+\subsection{StarkEx}
+
+StarkEx \cite{noauthor_starkex_nodate} is a Validium, which as mentioned in previous sections is a Layer-2 scaling solution that enforces the validity of all transactions using zero-knowledge proofs while keeping data availability off-chain. This prevents the Validium's funds from being stolen because any movement of value from a user's account must be authorised by that user.
+For applications such as DeFi and gaming, StarkEx uses STARK technology to power scalable self-custodial transactions (trading and payments). StarkEx allows an application to scale up quickly and reduce transaction expenses. Moreover, StarkEx has a Verifier Contract Upgrade mechanism in place that allows the operator to immediately add a new item to the chain of verified contracts. You can't remove user signature checks, for example, because this would invalidate the old reasoning. Rather, it enables the inclusion of extra constraints\cite{noauthor_introduction_nodate}.
+
+\subsection{Hybrid Solutions}
+
+Hybrid solutions incorporate the greatest features of different layer 2 technologies while also allowing for customisable trade-offs. One example of this is the Celer Network, which is utilised for off-chain scaling, cost-effective and quick dApp creation, blockchain-based games, and liquidity \cite{noauthor_layer_nodate}.
+

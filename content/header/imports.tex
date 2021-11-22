@@ -1,13 +1,26 @@
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
-\usepackage{cite}
+\usepackage[noadjust]{cite}
+\renewcommand{\citepunct}{,\penalty\citepunctpenalty\,}
+\renewcommand{\citedash}{--}% optionally
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
+\usepackage{listings}
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{mathtools}
 \usepackage{hyperref}
+\usepackage[super,square]{natbib}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+\ifCLASSOPTIONcompsoc
+    \usepackage[caption=false, font=normalsize, labelfont=sf, textfont=sf]{subfig}
+\else
+\usepackage[caption=false, font=footnotesize]{subfig}
+\fi
+
 \hypersetup{
     colorlinks=true,
     linkcolor=black,

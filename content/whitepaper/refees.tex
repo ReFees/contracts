@@ -139,32 +139,34 @@ In terms of blockchain infrastructure, {\projectName} will first be hosted on \t
 
 In this section, we aim to demonstrate how {\projectName} can be modelled as a set of smart contracts, operating between the provider, the client and the oracle. For reasons that will be explained in the following paragraphs, we chose to model {\projectName} using the following building blocks: 
 \begin{enumerate}
-    \item A native token  \$REF 
+    \item A native token \$REF which also acts as governance token. It follows the ERC-20 standard.
+    \item \label{contract:subscription} The {\projectName} subscription smart contract containing the reserve pool funding methods as well as the gas fees refund method.
+    \item A pair of NFT Tokens (ERC-721 standard), representing both ownership of contract \ref{contract:subscription}) for the client and the provider.
+    \item A general purpose collection type of smart contract managing the list of existing contracts \ref{contract:subscription}).
+    \item A Chainlink smart contract to acess the data oracle.
+    \item A Chainlink keepers smart contract to trigger refunds.
 \end{enumerate}
 
+In practice, at contract creation time, both provider and client addresses are set to the creator address. Then, the creator can trade/give the ownership of one side of the contract on a NFT marketplace. For example, if the creator wants to be the provider of the subscription, he will trade the client-side token. The buyer of the token then becomes the client. 
 
+The contract starts whenever the two addresses (client and provider) are different. During the subscription lifetime, we provide flexibility by allowing any party can trade its ownership token and exit the system. When ownership is traded, the contract simply updates the concerned address. Ownership could  be traded as NFTs on different marketplaces (ex: \href{opensea}{https://opensea.io/}). In that case, a user can claim one ownership using a "claim" method of the contract. This method checks if the claimer processes the corresponding NFT and updates one of the addresses if yes. The NFTs are minted by the subscription contract itself, ensuring that it can't be counterfeited (one can verify the emitter identidy of the given NFT)
 
-To conclude the system will support the following list of requirements: 
+Having the possibility to trade ownerships allows the actors to easily (assuming liquidity is high) get rid of theirs position. Imagine the scenario where a provider locks some funds in a subscription contract and some days later realizes that the Gas price will go up. This provider can then sell his ownership to someone else and avoid losses. Trading ownerships also allows the client to speculate on the gas price going up. Imagine a client starts a contract with a long maturity when the gas price is low, then if the gas prices suddenly rise the client can sell his ownership to another client for a higher price than the initial and make some profit.
+
+To conclude, the system will support the following list of requirements: 
 \begin{enumerate}
     \item The subscription contract can be created by either the provider or the client. 
-    \item Only one party needs to be specified upon creation. 
     \item The party responsible for the creation can trade ownership on the contract via a NFT marketplace.
     \item In the NFT marketplace, contract prices are set by the levels of the demand and the offer.  
     \item The creation phase amounts to fill in the variables highlighted in table \ref{tab:variables}. 
     \item Any party can decide to resell his ownership token on the NFT marketplace. If the token is bought, the new owner shall respect the contractual obligations defined at contract creation time.
 \end{enumerate}
 
-In practice, at contract creation time, both provider and client addresses are set to the creator address. Then, the creator can trade/give the ownership of one side of the contract on a NFT marketplace. For example, if the creator wants to be the provider of the subscription, he will trade the client-side token. The buyer of the token then becomes the client. 
-
-The contract starts whenever the two addresses (client and provider) are different. During the subscription lifetime, we provide flexibility by allowing any party can trade its ownership token and exit the system. When ownership is traded, the contract simply updates the concerned address. The easiest way to implement this mechanism would be to only use the native token of the system (\$REF) for the trades. In that case, all transactions would be internal to the {\projectName} system and could be implemented by keeping track of users' balances and using transfer functions. But ownerships could also be traded as NFTs (ERC-721) on different marketplaces (ex: \href{opensea}{https://opensea.io/}). In that case, a user can claim one ownership using a "claim" method of the contract. This method checks if the claimer processes the corresponding NFT and updates one of the addresses if yes.
-
-Having the possibility to trade ownerships allows the actors to easily (assuming liquidity is high) get rid of theirs position. Imagine the scenario where a provider locks some funds in a subscription contract and some days later realizes that the Gas price will go up. This provider can then sell his ownership to someone else and avoid losses. Trading ownerships also allows the client to speculate on the gas price going up. Imagine a client starts a contract with a long maturity when the gas price is low, then if the gas prices suddenly rise the client can sell his ownership to another client for a higher price than the initial and make some profit.
-More information on the tokenomics of the system can be found in section \ref{section:tokenomics}.
-
+More information on the tokenomics of the system can be found in section\ref{section:tokenomics}. 
 
 \subsection{Tokenomics} \label{section:tokenomics}
 
-{\projectName} system is ruled by the \$REF a governance token. This token acts as voting power and can be used to trade contracts. \$REF follows the ERC-20 standard. 
+{\projectName} system is ruled by the \$REF token (native and governance token). This token acts as voting power and can be used to trade contracts. 
 
 Holding some of the native tokens (\$REF) involves multiple benefits: 
 \begin{enumerate}

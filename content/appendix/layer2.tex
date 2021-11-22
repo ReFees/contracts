@@ -1,0 +1,106 @@
+\subsection{Sidechains}
+
+% Motivation
+Ethereum network is one of the most used blockchains on the market. Nevertheless, many blockchains exist and many more are to come. With every blockchain come blockchain-specific limitations, one may want to reduce its exposure to limitations by diversifying its blockchain networks. As highlighted previously, a daily Mainnet interactions DeFi protocol unveils high operation costs to the end user. Then it could be favourable to hold low transactions on a cheaper and less secure blockchain while the account balance and high transactions are saved on the Ethereum blockchain. This other blockchain would be called in this case a Sidechain to Ethereum blockchain.
+
+% Description
+As the name indicates, Sidechains are independent Ethereum-compatible blockchain that runs alongside to Ethereum Mainnet. Side chains can employ different ledger parameters, security mechanisms and consensus models to process transactions. Their frameworks are chosen carefully to efficiently exercise activities in relation to the main networks it operates in. A Sidechain can be designed to operate integrally with any blockchain. In other any form of data from the blockchain is cross-chain transferable. Furthermore, this paralleling between siblings chains permits a multi-layer communication channels with a delocalisation of the assets.
+
+As described above, having this EVM compatible chain allows increasing the scalability of the layer 1. The Sidechain smart contracts will manage infrastructure and distributed Sidechains statuses, while the Mainnet smart contracts manage validation proof and account states. One has to note that many Sidechains can be connected to the Mainnet.
+
+Any decentralised application that is constrained by low security exposure but high transaction throughput would optimise its operation network by accumulating Sidechains.
+
+% Technical 
+It is connected to a Mainnet by a two-way bridge, which consists in five simple steps :
+\begin{itemize}
+    \item Mainnet funds are locked;
+    \item Funds are unlocked on the Sidechain;
+    \item Transaction occurs with those funds;
+    \item When finished funds on Sidechain are burnt;
+    \item When burnt signaled is received, Mainnet funds are unlocked.
+\end{itemize}
+This makes each Sidechain self-contained, thus making it impossible for a waterfall attack to occur. 
+
+% Points fort et faibles
+%faible
+Can it be really considered as a Layer 2 solution since it does not rely on the security of the main chain? This can be considered as the main drawback compared to its main chain. Nevertheless, if ones ensure the same consensus models as the Mainnet, with similar security then the whole system could be considered as stable. Previous examples of fraud committed by a quorum validators have been seen. Showing that the decentralisation brought by the Sidechains could be harmful.
+
+To guarantee the two-way bridge connection, users can be prevented from withdrawing their funds. This liquidity fastening is a must to ensure the cross-chain protocol to  run.  However, in terms of consumer security it is considered at risk.
+
+%fort
+In contrary, this permits a pre-synthetic Sharding. For deeper explanation please refer to \cite{XXX}, but in a few words it does improve operational speed and increase the capacity of the network by extending the Mainnet with Sidechains, the load data on the data is thus distributed.
+
+Those siblings could also permits a pre-use of more \textit{sustainable} and innovative consensus models, thus earlier shifting the environmental impact within the Mainnet consensus.
+
+For Ethereum specific Sidechains, they are based on the Ethereum Virtual Machine meaning that the compatibility is ensured.
+
+
+% Adoption marché (utilisation)
+The Ethereum scalability improvement is mainly based on Sidechains for the moment. The main utilisation for Sidechains is application-specific transactions such as NFT art, DAO voting and stable transactions, including micro-transactions.
+
+Polygon : 
+
+% Future 
+Sidechains that could operate with multiple blockchains at the same time are currently under development. The main principle would be to allow for a multiple-way bridge. This siblings interoperability would allow for faster and cheaper transactions, as the network load would be spread across every chain.
+
+
+\subsection{State channels}
+% Motivation
+
+All applications do not need similar security standards. Imagine a DeFi service needs to take micro-payments, having those latter all recorded on the Mainnet would be gas expensive. Instead, the service could incentivise the user to lock a sufficient amount of fund in a pool that will later serve to pay the user service utilisation. This utilisation could be recorded off-chain and the reported final value recorded on a smart contract on the Ethereum blockchain that will latter transfer the necessary funds to the service holder.
+
+% Description
+
+To better understand the state channels Layer 2 solution, the definition of each words in the solution names help greatly.
+
+A State, is computationally defined as the condition of the variable linked to. While a channel is a communication vector employed between users interested in the mentioned variable. From those definitions, one understands state channels as a place for transaction, interactions and record that would later be published into the Mainnet. The channel is only accessible by authorised parties and should be a safe place.
+
+% Technical
+
+A smart contract between two or more parties is settling on the blockchain. This contract is dynamically interactive with the two users input. For example, receiving input x and y will change the smart contract to 0. While if the inputs were x and z, the state will change to 1. For the state smart contract to work, users would have to lock ETH into the smart contract to act as liquidity pool. The blockchain state has multi-signature lock to ensure the security of capitals, complete consensus has to be reached.
+
+% Points fort
+
+Only the users invited in the channel have access to those off-chain data and the interactions are instantaneous. Considering this last point, every message in the channel is digitally signed by the user that authorised it. No cheating and early leaving would affect the user pool. The second user can publish the state channel of the latest signed results.
+
+As you are not recording those off-chain data on the Mainnet, interactions have low fees, except for the final state. This last fee is, however, negligible in comparison to the computation that it would have been needed. The Mainnet is less congested with data.
+
+It is also possible for the entering users to set up end-time conditions, this gives higher flexibility to the users.
+
+% point faible
+
+The limitation of channels make impossible for the users to send funds off-chain to non-participants. For a simple recurring payments, the amount of capital would be known beforehand but in the case of more complex state transactions this amount could become very large. Not talking about margin protection like smart contract.
+
+The current state of the channel should be allowed to be published on the blockchain at any time. Meaning that at least one user has to publish this final state to protect each individual party's interests until the channel is totally closed. It has to be noted that the off-chain transaction is meaningful as long as the Mainnet is working.
+
+This solution gets rid of the initial goal of the blockchain to act as a fully private solution. The multi-signature procedure allows each user to know the other channel user identity.
+
+
+% Adoption marché (utilisation)
+State channels are under employed compared to their potential. Indeed, the judging smart contract set-up at the very beginning is the promise for each party to be partially treated. Meaning that this prior setting is of high importance, but may be a heavy step for potential users.
+
+% Future 
+This latter judge mechanism must be flawless, give interesting properties and the initial constraints must be known. Such application with well-known constraints would be low-level service, payment channels, direct contracts and unsecured transactions (i.e. the score of a soccer game). 
+
+Actual research are on the standardisation of a judge contract and user-friendly mechanism.
+
+
+\subsection{Rollups}
+
+Rollups are yet another type of scaling solution. The core idea is to execute transactions outside layer 1 and store the resulting transaction data as proof back on layer 1. Correct execution on layer 2 is ensured by a smart contract in layer 1 using the transaction data. Since computations are moved off-chain (e.g. on layer 2), transactions can be processed at a much higher rate. On layer 1, they are committed in batches using data compression mechanisms to reduce both cost and network effects on Ethereum. Hence, Rollups can be viewed as a combination between state channels and side chains since they can create general-purpose applications through the EVM compatibility while still fully making use of the security mechanisms deployed on Ethereum. To incentivise users to execute and verify transactions correctly, Rollup protocols require staking a bond as collateral. If a fraudulent action is detected, the system slashes the bonds of the users involved. 
+
+We can further distinguish between different types of Rollups when it comes to proofs and security model. 
+\subsubsection{Optimistic Rollups} 
+
+Optimistic Rollups optimistically assume that transactions are valid by default. In other words, the system doesn't check the transactions. If they indeed are valid, no additional work needs to be done. Otherwise, users can report invalid transactions to the system which then enters a dispute resolution mode. In this state, the Rollup will execute a fraud proof where the suspicious transactions are verified on the main Ethereum chain. If the transaction was indeed invalid, the state is reverted and the party that submitted it is punished : their staked bond is slashed. It is also worthy mentioning that users who report transactions also need to stake a bond to avoid unnecessary fraud proof computation. For the system to work correctly, the dispute resolution mode should be an exceptional state. 
+    
+\subsubsection{Zero-Knowledge (ZK) Rollups}
+ZK-Rollups leverage a cryptographic instrument called SNARK (a type of zero-knowledge proof) to produce validity proofs. More specifically, to emit a valid transaction in the system, the user has to provide a validity proof. In other words, invalid transactions are rejected right away. It also allows the smart contract of the ZK-Rollup to maintain the state of transactions on layer 2 only using these proofs instead of the whole transaction data, reducing both storage requirement and latency.
+
+\subsection{Validium}
+
+As a final note, we briefly describe \textit{Validium}. It is extremely similar to a ZK-Rollup, with the exception that ZK-Rollup data availability is on-chain, but \textit{Validium} data availability is off-chain. \cite{gluchowski_zkrollup_2021} \textit{Validium} can achieve far higher throughput as a result of this, and its operator can deny any user the opportunity to move their funds without ZK-Rollup's data availability guarantees.
+
+\subsection{Plasma}
+\cite{noauthor_aztec_nodate}
+Plasma is a Layer 2 scaling solution focused on Ethereum's growth. After state channels, it is expected to be the second fully deployed scaling solution on the Ethereum Mainnet\cite{sharma_complete_2020}. It is a platform that enables the establishment of child blockchains that rely on the Ethereum main chain for trust and arbitration. Child chains in Plasma can be developed to fulfil the needs of unique use cases, including those that are currently not possible on Ethereum. Plasma is better suited to decentralised apps that demand users to pay high transaction fees. However, the Plasma protocol is still in its early stages of development. The testing revealed a high throughput of up to 5,000 transactions per second, according to Ethereum specialists who participated. As a result, increasing the number of projects on the Ethereum Platform will not affect network congestion or transaction delays.
